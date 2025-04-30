@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ukraine QA Association</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const thankYou = document.getElementById('thank-you-message');
+        fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(response => {
+          if (response.ok) {
+            form.classList.add('hidden');
+            thankYou.classList.remove('hidden');
+          } else {
+            alert('Submission failed. Please try again.');
+          }
+        });
+      }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<!-- Hero Section -->
+<header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-700">Ukraine QA Association</h1>
+        <button onclick="document.getElementById('apply-form').classList.remove('hidden')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Join Us</button>
+    </div>
+</header>
+
+<!-- Introduction -->
+<section class="py-16 px-4 max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-4">Uniting QA Professionals Across Ukraine</h2>
+    <p class="text-lg text-gray-600">We bring together manual and automation QA engineers to share experience, collaborate, and grow professionally.</p>
+</section>
+
+<!-- About Section -->
+<section class="py-12 bg-white px-4">
+    <div class="max-w-5xl mx-auto text-center">
+        <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
+        <p class="text-gray-700 mb-6">
+            The Ukraine QA Association is a professional community of quality assurance specialists. Our mission is to support each other, organize knowledge-sharing events, and promote professional standards in QA across the country.
+        </p>
+    </div>
+</section>
+
+<!-- Additional Content Section -->
+<section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto text-center">
+        <h3 class="text-2xl font-semibold mb-4">Why It Matters</h3>
+        <p class="text-gray-700">
+            Quality assurance plays a critical role in building reliable software products. By joining the Ukraine QA Association, you become part of a strong network where you can exchange knowledge, attend events and webinars, and contribute to the national QA ecosystem.
+        </p>
+    </div>
+</section>
+
+<!-- Requirements Section -->
+<section id="join" class="py-12 px-4 bg-gray-100">
+    <div class="max-w-4xl mx-auto text-center">
+        <h3 class="text-2xl font-semibold mb-4">How to Join</h3>
+        <p class="mb-6 text-gray-700">To become a member, applicants must meet the following criteria:</p>
+        <ul class="text-left list-disc list-inside text-gray-800">
+            <li>Minimum 5 years of experience in QA (manual or automation)</li>
+            <li>Bachelor’s degree in Computer Science</li>
+            <li>Demonstrate extraordinary achievements in work or research within the field</li>
+            <li>Strong technical and analytical skills</li>
+        </ul>
+        <button onclick="document.getElementById('apply-form').classList.remove('hidden')" class="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Apply Now</button>
+    </div>
+</section>
+
+<!-- Application Form Modal -->
+<div id="apply-form" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
+        <button onclick="document.getElementById('apply-form').classList.add('hidden')" class="absolute top-2 right-2 text-gray-400 hover:text-black">&times;</button>
+        <h3 class="text-xl font-semibold mb-4">Apply to Join</h3>
+        <form action="https://formspree.io/f/mrbqeyjl" method="POST" class="space-y-4" onsubmit="handleFormSubmit(event)">
+            <!-- Honeypot field -->
+            <input type="text" name="_gotcha" style="display:none">
+
+            <div>
+                <label class="block mb-1 font-medium">Full Name</label>
+                <input name="fullName" type="text" class="w-full border px-3 py-2 rounded-md" required>
+            </div>
+            <div>
+                <label class="block mb-1 font-medium">Email</label>
+                <input name="email" type="email" class="w-full border px-3 py-2 rounded-md" required>
+            </div>
+            <div>
+                <label class="block mb-1 font-medium">Contact Phone Number</label>
+                <input name="phone" type="tel" class="w-full border px-3 py-2 rounded-md" required>
+            </div>
+            <div>
+                <label class="block mb-1 font-medium">Your Message</label>
+                <textarea name="message" class="w-full border px-3 py-2 rounded-md" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Submit</button>
+        </form>
+        <div id="thank-you-message" class="hidden text-green-600 text-center font-medium mt-4">Thank you for applying! We'll get in touch with you soon.</div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="py-6 bg-white border-t mt-12 text-center text-gray-500 text-sm">
+    © 2025 Ukraine QA Association. All rights reserved.
+</footer>
+</body>
+</html>
